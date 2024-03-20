@@ -13,16 +13,32 @@ import java.io.IOException;
 @Service
 public class AuthenticationService {
 
-    //private final PersonRepository personRepository;
+    // private final PersonRepository personRepository;
+    // Dependency injection of repository, possibly used to access the database.
+    // Injecting Spring Security's PasswordEncoder for password encoding.
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Initializes the authentication service.
+     * @param passwordEncoder The password encoder for encoding passwords.
+     * @param useJsonStorage Boolean indicating whether to use JSON storage or not.
+     */
 
     public AuthenticationService(
             PasswordEncoder passwordEncoder,
             @Value("${use.json.storage:false}") boolean useJsonStorage) {
         this.passwordEncoder = passwordEncoder;
     }
+
+    /**
+     * Registers a new person in the system.
+     * @param registrationDTO Data Transfer Object containing user registration information.
+     * @return The newly registered person.
+     * @throws PersonAlreadyExistsException If the person already exists in the system.
+     * @throws RuntimeException If an error occurs while saving the person data.
+     */
     public Person registerPerson(PersonRegistrationDTO registrationDTO){
+        // Creating a new instance of Person from the provided DTO data.
         Person newPerson = new Person();
         newPerson.setId(registrationDTO.getId());
         newPerson.setIdType(registrationDTO.getIdType());
@@ -31,20 +47,25 @@ public class AuthenticationService {
         newPerson.setCity(registrationDTO.getCity());
         newPerson.setRole(registrationDTO.getRole());
         newPerson.setPhone(registrationDTO.getPhone());
-        newPerson.setBirthday(registrationDTO.getBirthday());
+        newPerson.setBirthdate(registrationDTO.getBirthdate());
         newPerson.setCountry(registrationDTO.getCountry());
         newPerson.setCity(registrationDTO.getCity());
         newPerson.setProvince(registrationDTO.getProvince());
         newPerson.setResidence(registrationDTO.getResidence());
+
+        // Encoding the password before storing it in the database.
         newPerson.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
 
         try {
+            // Attempting to save the person information in JSON format.
             JsonUtils.savePerson(newPerson);
-        } catch (PersonAlreadyExistsException e) {
+        } catch (PersonAlreadyExistsException e) { // If the person already exists, a custom exception is thrown.
             throw e;
-        } catch (IOException e) {
+        } catch (IOException e) { // If there is an I/O error, a general exception is thrown.
             throw new RuntimeException("An error occurred while saving the person data: " + e.getMessage(), e);
         }
+
+        // Returning the newly registered person.
         return newPerson;
     }
 
