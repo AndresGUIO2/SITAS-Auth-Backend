@@ -3,21 +3,26 @@ package com.udea.authorizationauthentication.dto;
 /**
  * The PersonRegistrationDTO class is a data transfer object used to register a new person.
  * It encapsulates the user registration information required during the sign-up process.
+ *
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
  */
 public class PersonRegistrationDTO {
 
-    private Long id;
-    private String idType;
-    private String firstname;
-    private String lastname;
-    private String password;
-    private String country;
-    private String province;
-    private String city;
-    private String residence;
-    private String phone;
-    private String role;
-    private String birthdate;
+    private Long id; // The unique identifier for the person.
+    private String idType; // The type of identification (e.g., passport, driver's license).
+    private String firstname; // The first name of the person.
+    private String lastname; // The last name of the person.
+    private String password; // The password for the person's account.
+    private String country; // The country of residence of the person.
+    private String province; // The province or state of residence of the person.
+    private String city; // The city of residence of the person.
+    private String residence; // The residence address of the person.
+    private String phone; // The contact phone number of the person.
+    private String role; // The role or designation of the person.
+    private String birthdate; // The birthdate of the person, in ISO format (yyyy-MM-dd).
 
     /**
      * Default constructor for PersonRegistrationDTO.
