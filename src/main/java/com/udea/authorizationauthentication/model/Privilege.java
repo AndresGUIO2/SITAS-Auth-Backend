@@ -3,6 +3,11 @@ package com.udea.authorizationauthentication.model;
 /**
  * Represents a privilege entity.
  * This class defines the privileges that can be associated with roles in the system.
+ *
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
  */
 public class Privilege {
 
