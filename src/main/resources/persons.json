@@ -1,0 +1,14 @@
+[ {
+  "id" : 1,
+  "idType" : "CC",
+  "firstname" : "Juan",
+  "lastname" : "Perez",
+  "password" : "$2a$10$mfdTKv4jzPyszu.T3ZqWheFjpjHV45jKQjqJbeHQKz6/kBYJE3hfu",
+  "country" : "Colombia",
+  "province" : "Antioquia",
+  "city" : "Medellin",
+  "residence" : "Calle 123",
+  "phone" : "3001234567",
+  "role" : "USER",
+  "birthday" : "1990-01-01"
+} ]

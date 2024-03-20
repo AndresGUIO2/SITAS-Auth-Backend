@@ -3,7 +3,7 @@ package com.udea.authorizationauthentication.service;
 import com.udea.authorizationauthentication.dto.PersonRegistrationDTO;
 import com.udea.authorizationauthentication.exception.PersonAlreadyExistsException;
 import com.udea.authorizationauthentication.model.Person;
-import com.udea.authorizationauthentication.util.JsonUtils;
+import util.JsonUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
