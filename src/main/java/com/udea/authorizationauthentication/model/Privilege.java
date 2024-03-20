@@ -1,4 +1,5 @@
 package com.udea.authorizationauthentication.model;
 
-public class Privilage {
+public class Privilege {
+
 }

@@ -1,18 +1,9 @@
-package com.udea.authorizationauthentication.model;
+package com.udea.authorizationauthentication.dto;
 
 import java.time.LocalDate;
 
-/**
- * Represents a person entity with its attributes such as name, id, password, etc...
- * This class provides getters and setters for accessing and modifying the attributes.
- * Flight objects can be serialized and deserialized using JSON format.
- *
- * @author Natalia García
- * @author Héctor Güiza
- * @author Jeisson Barrantes
- * @author Hellen Rubio
- */
-public class Person {
+public class PersonRegistrationDTO {
+
     private Long id;
     private String idType;
     private String firstname;
@@ -26,11 +17,13 @@ public class Person {
     private String role;
     private String birthday;
 
-    public Person(){
+    public PersonRegistrationDTO(){
+
     }
 
-    public Person(Long id, String idType, String firstname, String lastname, String password, String country,
-                  String province, String city, String residence, String phone, String role, String birthday) {
+    public PersonRegistrationDTO(Long id, String idType, String firstname, String lastname, String password,
+                                 String country, String province, String city, String residence, String phone,
+                                 String role, String birthday) {
         this.id = id;
         this.idType = idType;
         this.firstname = firstname;
