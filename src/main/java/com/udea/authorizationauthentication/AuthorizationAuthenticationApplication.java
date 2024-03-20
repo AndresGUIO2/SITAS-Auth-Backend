@@ -8,12 +8,35 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Main application class for the authorization and authentication module.
+ * This class configures and starts the Spring Boot application.
+ * It excludes DataSourceAutoConfiguration to disable automatic DataSource configuration.
+ * Additionally, it provides a bean for configuring CORS (Cross-Origin Resource Sharing) filters,
+ * allowing requests from any origin, header, and method.
+ *
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
+ */
 @SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class AuthorizationAuthenticationApplication {
+
+	/**
+	 * Main method to start the Spring Boot application.
+	 *
+	 * @param args command line arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(AuthorizationAuthenticationApplication.class, args);
 	}
 
+	/**
+	 * Configures a CORS filter to allow requests from any origin, header, and method.
+	 *
+	 * @return a CorsFilter instance configured to allow all origins, headers, and methods
+	 */
 	@Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -25,6 +48,4 @@ public class AuthorizationAuthenticationApplication {
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
-
-
 }
