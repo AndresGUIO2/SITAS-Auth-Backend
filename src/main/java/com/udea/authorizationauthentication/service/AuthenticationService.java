@@ -10,6 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+ * Service responsible for user authentication and registration.
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
+ */
 @Service
 public class AuthenticationService {
 
