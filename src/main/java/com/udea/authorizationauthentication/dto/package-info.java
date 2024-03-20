@@ -9,6 +9,11 @@
  *
  * <p>This package contains the {@link com.udea.authorizationauthentication.dto.PersonRegistrationDTO}
  * which is responsible for carrying person registration data from clients to the server for processing.</p>
+ *
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
  */
 package com.udea.authorizationauthentication.dto;
 
