@@ -9,7 +9,7 @@ Para ejecutar la aplicación Authorization Authentication, sigue estos pasos:
 1. **Clonar el Repositorio 📦**: Clona el repositorio de GitHub en tu máquina local.
 
    ```bash
-   git clone https://github.com/tu_usuario/vuelo.git
+   git clone https://github.com/AndresGUIO2/SITAS-Auth-Backend.git
 
 2. **Importar Proyecto 📁**: Abre el proyecto en tu IDE como un proyecto de Maven.
 
