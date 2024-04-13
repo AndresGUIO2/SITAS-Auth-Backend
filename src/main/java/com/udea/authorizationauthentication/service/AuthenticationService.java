@@ -19,10 +19,6 @@ import java.io.IOException;
  */
 @Service
 public class AuthenticationService {
-
-    // private final PersonRepository personRepository;
-    // Dependency injection of repository, possibly used to access the database.
-    // Injecting Spring Security's PasswordEncoder for password encoding.
     private final PasswordEncoder passwordEncoder;
 
     /**
