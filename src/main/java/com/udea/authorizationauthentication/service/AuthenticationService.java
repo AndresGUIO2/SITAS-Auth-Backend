@@ -41,7 +41,6 @@ public class AuthenticationService {
      * @throws RuntimeException If an error occurs while saving the person data.
      */
     public Person registerPerson(PersonRegistrationDTO registrationDTO){
-        // Creating a new instance of Person from the provided DTO data.
         Person newPerson = new Person();
         newPerson.setId(registrationDTO.getId());
         newPerson.setIdType(registrationDTO.getIdType());
@@ -56,19 +55,16 @@ public class AuthenticationService {
         newPerson.setProvince(registrationDTO.getProvince());
         newPerson.setResidence(registrationDTO.getResidence());
 
-        // Encoding the password before storing it in the database.
         newPerson.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
 
         try {
-            // Attempting to save the person information in JSON format.
             JsonUtils.savePerson(newPerson);
-        } catch (PersonAlreadyExistsException e) { // If the person already exists, a custom exception is thrown.
+        } catch (PersonAlreadyExistsException e) {
             throw e;
-        } catch (IOException e) { // If there is an I/O error, a general exception is thrown.
+        } catch (IOException e) {
             throw new RuntimeException("An error occurred while saving the person data: " + e.getMessage(), e);
         }
 
-        // Returning the newly registered person.
         return newPerson;
     }
 
