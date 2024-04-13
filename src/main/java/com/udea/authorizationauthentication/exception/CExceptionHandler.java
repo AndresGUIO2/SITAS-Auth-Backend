@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * as a global exception handler for controllers, providing a centralized exception handling across all
  * {@code @RequestMapping} methods.
  * </p>
- *  * @author Natalia García
- *  * @author Héctor Güiza
- *  * @author Jeisson Barrantes
- *  * @author Hellen Rubio
+ * @author Natalia García
+ * @author Héctor Güiza
+ * @author Jeisson Barrantes
+ * @author Hellen Rubio
  */
 @RestControllerAdvice
 public class CExceptionHandler {
