@@ -1,19 +1,20 @@
 package com.udea.authorizationauthentication.model;
 
-/**
- * Represents the role or occupation of a person within the system.
- * This class provides constructors to create Role objects.
- * @author Natalia García
- * @author Héctor Güiza
- * @author Jeisson Barrantes
- * @author Hellen Rubio
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Role {
 
-    /**
-     * Constructs a new Role object.
-     */
-    Role() {
+    private Long id;
+    private RoleName name;
 
+    // Si prefieres tener control más fino, puedes poner anotaciones @Getter y @Setter en cada campo individualmente.
+
+    public enum RoleName {
+        ROLE_SUPER_ADMIN,
+        ROLE_ADMIN,
+        ROLE_USER
     }
 }
