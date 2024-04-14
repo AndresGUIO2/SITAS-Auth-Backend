@@ -47,6 +47,7 @@ public class AuthenticationService {
         newPerson.setFirstname(registrationDTO.getFirstname());
         newPerson.setLastname(registrationDTO.getLastname());
         newPerson.setCity(registrationDTO.getCity());
+        newPerson.setMail(registrationDTO.getMail());
         newPerson.setRole(registrationDTO.getRole());
         newPerson.setPhone(registrationDTO.getPhone());
         newPerson.setBirthdate(registrationDTO.getBirthdate());

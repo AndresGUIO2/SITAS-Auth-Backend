@@ -1,13 +1,13 @@
 package com.udea.authorizationauthentication.config.swagger;
-
+/*
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.access.prepost.PreAuthorize;
-
+import org.springframework.security.access.prepost.PreAuthorize;*/
+/*
 @Configuration
 public class SwaggerConfiguration {
     @PreAuthorize("permitAll")
@@ -20,3 +20,4 @@ public class SwaggerConfiguration {
                         .contact(new Contact().email("angelagueror23@gmail.com").name("Angel Aguero").url("https://github.com/Angel-Raa")));
     }
 }
+*/

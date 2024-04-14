@@ -69,8 +69,8 @@ public class WebSecurityConfig {
                         .requestMatchers("/public/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
-                .headers(headers ->
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+                /*.headers(headers ->
                         headers.xssProtection(
                                 xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
                         ).contentSecurityPolicy(
@@ -80,7 +80,7 @@ public class WebSecurityConfig {
                                         + "object-src 'none';script-src 'self';"
                                         + "script-src-attr 'none';style-src 'self' https: 'unsafe-inline';"
                                         + "upgrade-insecure-requests")
-                        ));
+                        ));*/
         return http.build();
     }
 

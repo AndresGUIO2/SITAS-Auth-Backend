@@ -4,12 +4,26 @@
   "firstname" : "Juan",
   "lastname" : "Perez",
   "password" : "$2a$10$mfdTKv4jzPyszu.T3ZqWheFjpjHV45jKQjqJbeHQKz6/kBYJE3hfu",
-  "mail": "Perez@falso.com",
+  "mail" : "Perez@falso.com",
   "country" : "Colombia",
   "province" : "Antioquia",
   "city" : "Medellin",
   "residence" : "Calle 123",
   "phone" : "3001234567",
   "role" : "USER",
-  "birthday" : "1990-01-01"
+  "birthdate" : "1990-01-01"
+}, {
+  "id" : 2,
+  "idType" : "CC",
+  "firstname" : "Gansito",
+  "lastname" : "Cuac",
+  "password" : "$2a$10$o5ZzJa9hodyXhfoQPjKdAurV7lwsklcT17Jm3ZY8Fj0iODIv3y3h2",
+  "mail" : "gansito@cuac.com",
+  "country" : "Colombia",
+  "province" : "Antioquia",
+  "city" : "Medellin",
+  "residence" : "Calle 123",
+  "phone" : "3001234567",
+  "role" : "USER",
+  "birthdate" : "1990-01-01"
 } ]
