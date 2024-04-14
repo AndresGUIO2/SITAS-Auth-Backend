@@ -4,6 +4,7 @@
   "firstname" : "Juan",
   "lastname" : "Perez",
   "password" : "$2a$10$mfdTKv4jzPyszu.T3ZqWheFjpjHV45jKQjqJbeHQKz6/kBYJE3hfu",
+  "mail": "Perez@falso.com",
   "country" : "Colombia",
   "province" : "Antioquia",
   "city" : "Medellin",

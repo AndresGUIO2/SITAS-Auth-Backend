@@ -1,5 +1,6 @@
 package util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.udea.authorizationauthentication.exception.PersonAlreadyExistsException;
@@ -11,6 +12,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Utility class for JSON operations related to {@code Person} objects.
@@ -57,5 +59,18 @@ public class JsonUtils {
 
         // Write all the persons back to the JSON file
         mapper.writeValue(file, persons);
+    }
+
+    public static Person findPersonByMail(String mail) {
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            List<Person> people = mapper.readValue(new File(USERS_FILE_PATH), new TypeReference<List<Person>>(){});
+            Optional<Person> match = people.stream()
+                    .filter(person -> mail.equals(person.getMail()))
+                    .findFirst();
+            return match.orElse(null);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to read users from JSON", e);
+        }
     }
 }
