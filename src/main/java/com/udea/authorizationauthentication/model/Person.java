@@ -18,7 +18,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 public class Person {
-    private Long id;
+    private String id;
     private String idType;
     private String firstname;
     private String lastname;
@@ -55,7 +55,7 @@ public class Person {
      * @param birthdate the person's birthdate
      */
 
-    public Person(Long id, String idType, String firstname, String lastname, String password, String mail, String country,
+    public Person(String id, String idType, String firstname, String lastname, String password, String mail, String country,
                   String province, String city, String residence, String phone, String role, String birthdate) {
         this.id = id;
         this.idType = idType;

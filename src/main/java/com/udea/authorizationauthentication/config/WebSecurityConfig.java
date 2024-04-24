@@ -1,6 +1,7 @@
 package com.udea.authorizationauthentication.config;
 
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
+import com.udea.authorizationauthentication.service.CustomOAuth2UserService;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -35,6 +35,13 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
+
+    private final CustomOAuth2UserService customOAuth2UserService;
+
+    @Autowired
+    public WebSecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+        this.customOAuth2UserService = customOAuth2UserService;
+    }
 
     /**
      * Defines a bean for PasswordEncoder to use BCrypt hashing.
@@ -69,7 +76,19 @@ public class WebSecurityConfig {
                         .requestMatchers("/public/api/auth/**").permitAll()
                         .anyRequest().authenticated()
                 )
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)));
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/oauth2-login")
+                        .defaultSuccessUrl("/oauth2/loginSuccess", true)
+                        .failureUrl("/login?error=true")
+                        .authorizationEndpoint(authorization ->
+                                authorization.baseUri("/oauth2/authorize"))
+                        .redirectionEndpoint(redirection ->
+                                redirection.baseUri("/login/oauth2/code/*"))
+                        .userInfoEndpoint(userInfo ->
+                                userInfo.userService(this.customOAuth2UserService))
+                );
+
                 /*.headers(headers ->
                         headers.xssProtection(
                                 xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
@@ -89,4 +108,5 @@ public class WebSecurityConfig {
         SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
         return NimbusJwtDecoder.withSecretKey(key).build();
     }
+
 }
