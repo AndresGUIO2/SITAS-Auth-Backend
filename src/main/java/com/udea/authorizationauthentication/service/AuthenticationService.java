@@ -57,7 +57,6 @@ public class AuthenticationService {
         return newPerson;
     }
 
-
     private void savePerson(Person person) throws IOException {
         if (useJsonStorage) {
             JsonUtils.savePerson(person);

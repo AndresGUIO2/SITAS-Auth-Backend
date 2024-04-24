@@ -13,7 +13,7 @@ public class SwaggerConfiguration {
     @PreAuthorize("permitAll")
     @Bean
     OpenAPI openAPI(@Value("0.0.1-SNAPSHOT")  String appVersion) {
-        return new OpenAPI()
+        return new OpenApi
                 .info(new Info().title("spring security jwt authentication and authorization")
                         .version(appVersion)
                         .description("Spring Security JWT Authentication and Authorization")

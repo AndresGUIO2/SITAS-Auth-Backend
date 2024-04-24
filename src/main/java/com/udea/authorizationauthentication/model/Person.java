@@ -54,7 +54,6 @@ public class Person {
      * @param role the person's role or occupation
      * @param birthdate the person's birthdate
      */
-
     public Person(String id, String idType, String firstname, String lastname, String password, String mail, String country,
                   String province, String city, String residence, String phone, String role, String birthdate) {
         this.id = id;

@@ -16,7 +16,7 @@ public class AdditionalInfoController {
     @PostMapping("/additional-info")
     public ResponseEntity<?> saveAdditionalUserInfo(@AuthenticationPrincipal OidcUser principal,
                                                     @RequestBody AdditionalUserInfoDTO additionalInfo) {
-        // Implementación de lógica para manejar los datos adicionales
+        // TODO: Implementación de lógica para manejar los datos adicionales
         return ResponseEntity.ok("Datos adicionales guardados");
     }
 }
