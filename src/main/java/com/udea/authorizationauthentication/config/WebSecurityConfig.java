@@ -4,6 +4,7 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -65,17 +66,22 @@ public class WebSecurityConfig {
      * @return a SecurityFilterChain instance
      * @throws Exception if an error occurs during configuration
      */
+
+    private static final String[] AUTH_WHITELIST = {"/swagger-resources", "/swagger-resources/**", "/configuration/ui",
+            "/configuration/security", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/**", "v3/api-docs",
+            "/api/public/**", "/api/public/authenticate", "/actuator/*", "/swagger-ui/**", "/api-docs/**"};
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+
+
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/api/auth/**").permitAll()
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/oauth2-login")
@@ -87,6 +93,7 @@ public class WebSecurityConfig {
                                 redirection.baseUri("/login/oauth2/code/*"))
                         .userInfoEndpoint(userInfo ->
                                 userInfo.userService(this.customOAuth2UserService))
+
                 );
 
                 /*.headers(headers ->
