@@ -2,7 +2,10 @@ package com.udea.authorizationauthentication.Swagger;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.security.*;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -13,13 +16,21 @@ public class SwaggerConfig {
 
     String authURL;
 
+    @Bean
     public OpenAPI api(){
         return new OpenAPI()
-        .addSecurityItem(new SecurityRequirement()
-                .addList(OAUTH_SCHEME))
-                .components(new Components()
-                        .addSecuritySchemes(OAUTH_SCHEME, createOAuthScheme()))
-                .addSecurityItem(new SecurityRequirement().addList(OAUTH_SCHEME));
+                .info(new Info()
+                        .title("Authorization and Authentication Module API")
+                        .version("0.0.1")
+                        .description("This API exposes endpoints to Authorization and Authentication module for SITAS.")
+                        .contact(new Contact()
+                                .name("Hellen Jakeline Rubio Casas")
+                                .email("hellen.rubio@udea.edu.co")))
+                .addSecurityItem(new SecurityRequirement()
+                        .addList(OAUTH_SCHEME))
+                        .components(new Components()
+                                .addSecuritySchemes(OAUTH_SCHEME, createOAuthScheme()))
+                        .addSecurityItem(new SecurityRequirement().addList(OAUTH_SCHEME));
     }
     private SecurityScheme createOAuthScheme() {
         return new SecurityScheme().type(SecurityScheme.Type.OAUTH2).flows(createOAuthFlows());

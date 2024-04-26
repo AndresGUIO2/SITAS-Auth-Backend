@@ -2,6 +2,7 @@ package com.udea.authorizationauthentication.controller;
 import com.udea.authorizationauthentication.dto.PersonRegistrationDTO;
 import com.udea.authorizationauthentication.model.Person;
 import com.udea.authorizationauthentication.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
  * @author Jeisson Barrantes
  * @author Hellen Rubio
  */
+@Tag(name = "SIGN UP", description = "POST sign up person method")
 @RestController
 @RequestMapping("/public/api/auth")
 public class PersonController {
