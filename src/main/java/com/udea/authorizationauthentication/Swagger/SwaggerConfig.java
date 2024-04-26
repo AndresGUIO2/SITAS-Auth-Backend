@@ -26,10 +26,11 @@ public class SwaggerConfig {
     }
     private OAuthFlows createOAuthFlows() {
         final var oauthFlow = new OAuthFlow()
-                .authorizationUrl(authURL + "/oauth2/authorize") // URL de autorización de OAuth2
-                .tokenUrl(authURL + "/oauth2/token") // URL de token de OAuth2
-                .scopes(new Scopes()); // Definir los ámbitos de OAuth2 si es necesario
-        return new OAuthFlows().authorizationCode(oauthFlow); // Utilizar el flujo de autorización de código
+                .authorizationUrl(authURL + "/protocol/openid-connect" + "/auth")
+                .refreshUrl(authURL + "/protocol/openid-connect" + "/token")
+                .tokenUrl(authURL + "/protocol/openid-connect" + "/token")
+                .scopes(new Scopes());
+        return new OAuthFlows().authorizationCode(oauthFlow);
     }
 
 

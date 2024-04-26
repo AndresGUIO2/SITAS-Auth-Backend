@@ -12,4 +12,18 @@
   "phone" : "3001234567",
   "role" : "USER",
   "birthdate" : "1990-01-01"
+}, {
+  "id" : "4030195541",
+  "idType" : "string",
+  "firstname" : "string",
+  "lastname" : "string",
+  "password" : "$2a$10$Y6IeHit0D2UzEdzE6WAED.whVBPaE1L1InYX/.pJ.BEzccFIeONGS",
+  "mail" : "string@gmail.com",
+  "country" : "string",
+  "province" : "string",
+  "city" : "string",
+  "residence" : "string",
+  "phone" : "string",
+  "role" : "string",
+  "birthdate" : "string"
 } ]

@@ -67,9 +67,9 @@ public class WebSecurityConfig {
      * @throws Exception if an error occurs during configuration
      */
 
-    private static final String[] AUTH_WHITELIST = {"/swagger-resources", "/swagger-resources/**", "/configuration/ui",
+    private static final String[] AUTH_WHITELIST = {"/swagger-resources","auth/login", "/swagger-resources/**", "/configuration/ui",
             "/configuration/security", "/swagger-ui.html", "/webjars/**", "/v3/api-docs/**", "v3/api-docs",
-            "/api/public/**", "/api/public/authenticate", "/actuator/*", "/swagger-ui/**", "/api-docs/**"};
+            "/api/public/**", "/api/public/authenticate","/public/api/auth/**" ,"/actuator/*", "/swagger-ui/**", "/api-docs/**"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -81,7 +81,10 @@ public class WebSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.requestMatchers(AUTH_WHITELIST)
+                        .permitAll()
+                        .anyRequest()
+                        .authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)))
                 .oauth2Login(oauth2 -> oauth2
                         .loginPage("/oauth2-login")

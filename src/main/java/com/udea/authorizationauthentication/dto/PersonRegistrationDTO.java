@@ -186,7 +186,7 @@ public class PersonRegistrationDTO {
      * @param firstname The first name of the person.
      * @param lastname The last name of the person.
      * @param password The password for the person's account.
-     * @param mail The mail of the perso. Used for logging process.
+     * @param mail The mail of the person Used for logging process.
      * @param country The country of residence of the person.
      * @param province The province or state of residence of the person.
      * @param city The city of residence of the person.
