@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.beans.factory.annotation.Value;
 import com.udea.authorizationauthentication.service.CustomOAuth2UserService;
+import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -97,9 +98,8 @@ public class WebSecurityConfig {
                         .userInfoEndpoint(userInfo ->
                                 userInfo.userService(this.customOAuth2UserService))
 
-                );
-
-                /*.headers(headers ->
+                )
+                .headers(headers ->
                         headers.xssProtection(
                                 xss -> xss.headerValue(XXssProtectionHeaderWriter.HeaderValue.ENABLED_MODE_BLOCK)
                         ).contentSecurityPolicy(
@@ -109,7 +109,7 @@ public class WebSecurityConfig {
                                         + "object-src 'none';script-src 'self';"
                                         + "script-src-attr 'none';style-src 'self' https: 'unsafe-inline';"
                                         + "upgrade-insecure-requests")
-                        ));*/
+                        ));
         return http.build();
     }
 
