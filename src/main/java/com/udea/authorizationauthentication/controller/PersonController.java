@@ -2,6 +2,11 @@ package com.udea.authorizationauthentication.controller;
 import com.udea.authorizationauthentication.dto.PersonRegistrationDTO;
 import com.udea.authorizationauthentication.model.Person;
 import com.udea.authorizationauthentication.service.AuthenticationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +24,27 @@ import org.springframework.http.HttpStatus;
  * @author Jeisson Barrantes
  * @author Hellen Rubio
  */
-@Tag(name = "SIGN UP", description = "POST sign up person method")
+@Tag(name = "REGISTER", description = "POST Register person method")
 @RestController
 @RequestMapping("/public/api/auth")
 public class PersonController {
 
     @Autowired
     private AuthenticationService authenticationService;
+
+    @ApiResponses({
+            @ApiResponse(responseCode = "200",
+                    content = {
+                            @Content(schema = @Schema(implementation = Person.class),
+                            mediaType = "application/json") }),
+
+            @ApiResponse(responseCode = "404",
+                    content = {
+                    @Content(schema = @Schema()) }),
+
+            @ApiResponse(responseCode = "500",
+                    content = {
+                    @Content(schema = @Schema()) }) })
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody PersonRegistrationDTO registrationDto) {
