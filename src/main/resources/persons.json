@@ -26,4 +26,18 @@
   "phone" : "string",
   "role" : "string",
   "birthdate" : "string"
+}, {
+  "id" : "1000655184",
+  "idType" : "1",
+  "firstname" : "Natalia",
+  "lastname" : "García",
+  "password" : "$2a$10$iCPArlxKBOg/I.FlBZ7e6.xwN8gsX./LHY84tHFemAkqQRepQSYu2",
+  "mail" : "natalia@gmail.com",
+  "country" : "string",
+  "province" : "string",
+  "city" : "string",
+  "residence" : "string",
+  "phone" : "string",
+  "role" : "string",
+  "birthdate" : "string"
 } ]
