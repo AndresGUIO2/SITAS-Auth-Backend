@@ -40,4 +40,32 @@
   "phone" : "string",
   "role" : "string",
   "birthdate" : "string"
+}, {
+  "id" : "5079479904",
+  "idType" : "string",
+  "firstname" : "string",
+  "lastname" : "string",
+  "password" : "$2a$10$XCiHYef4lyR5xDBJ6MVUVedgBsywfUP4eQKyFE9v6rKiMN00zfU82",
+  "mail" : "ne@gmail.com",
+  "country" : "string",
+  "province" : "string",
+  "city" : "string",
+  "residence" : "string",
+  "phone" : "string",
+  "role" : "string",
+  "birthdate" : "string"
+}, {
+  "id" : "1234567890",
+  "idType" : "string",
+  "firstname" : "string",
+  "lastname" : "string",
+  "password" : "$2a$10$Lef4SnfkL1Uglml6HVLdfuDfhBC/ploV0nhuFTs5VHxnCZzGZuEgu",
+  "mail" : "je@gmail.com",
+  "country" : "string",
+  "province" : "string",
+  "city" : "string",
+  "residence" : "string",
+  "phone" : "string",
+  "role" : "string",
+  "birthdate" : "string"
 } ]

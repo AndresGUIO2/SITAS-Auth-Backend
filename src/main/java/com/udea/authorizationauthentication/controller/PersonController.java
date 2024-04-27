@@ -32,20 +32,18 @@ public class PersonController {
     @Autowired
     private AuthenticationService authenticationService;
 
+    @Operation(summary = "Register a person", description = "Register a person with mail and password as credentials.")
     @ApiResponses({
             @ApiResponse(responseCode = "200",
                     content = {
                             @Content(schema = @Schema(implementation = Person.class),
                             mediaType = "application/json") }),
-
             @ApiResponse(responseCode = "404",
                     content = {
                     @Content(schema = @Schema()) }),
-
             @ApiResponse(responseCode = "500",
                     content = {
                     @Content(schema = @Schema()) }) })
-
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody PersonRegistrationDTO registrationDto) {
         try {

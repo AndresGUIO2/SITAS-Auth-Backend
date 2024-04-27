@@ -81,9 +81,13 @@ public class PersonRegistrationDTO {
       * @param password A string representing the password.
      */
     @Size(min = 8, message = "Password must be at least 8 characters long")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?!.*[#='$;%]).{8,}$",
-            message = "Password must contain at least one digit, one lowercase letter, one uppercase letter, one symbol, and cannot contain #='$;%")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^" +
+            "&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?])(?!.*[#='$;%]).{8,}$",
+            message = "Password must contain at least one digit, one " +
+                    "lowercase letter, one uppercase letter, one symbol, " +
+                    "and cannot contain #='$;%")
     private String password;
+
     @Email(message = "Email should be valid")
     private String mail;
     /**
