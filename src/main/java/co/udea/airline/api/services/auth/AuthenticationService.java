@@ -35,5 +35,8 @@ public class AuthenticationService {
     public Optional<Person> findPersonByMail(String mail) {
         return personRepository.findByMail(mail);
     }
-}
 
+    public Person getPersonDetailsByEmail(String email) {
+        return personRepository.findByMail(email).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+}

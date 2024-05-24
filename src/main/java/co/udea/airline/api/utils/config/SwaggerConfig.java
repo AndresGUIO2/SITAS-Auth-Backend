@@ -1,4 +1,5 @@
 package co.udea.airline.api.utils.config;
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
@@ -13,11 +14,12 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     private static final String OAUTH_SCHEME = "auth";
+    private static final String BEARER_SCHEME = "bearerAuth";
 
     String authURL;
 
     @Bean
-    public OpenAPI api(){
+    public OpenAPI api() {
         return new OpenAPI()
                 .info(new Info()
                         .title("Authorization and Authentication Module API")
@@ -26,15 +28,19 @@ public class SwaggerConfig {
                         .contact(new Contact()
                                 .name("Hellen Jakeline Rubio Casas")
                                 .email("hellen.rubio@udea.edu.co")))
-                .addSecurityItem(new SecurityRequirement()
-                        .addList(OAUTH_SCHEME))
-                        .components(new Components()
-                                .addSecuritySchemes(OAUTH_SCHEME, createOAuthScheme()))
-                        .addSecurityItem(new SecurityRequirement().addList(OAUTH_SCHEME));
+                .addSecurityItem(new SecurityRequirement().addList(OAUTH_SCHEME))
+                .components(new Components()
+                        .addSecuritySchemes(OAUTH_SCHEME, createOAuthScheme())
+                        .addSecuritySchemes(BEARER_SCHEME, createBearerScheme()))
+                .addSecurityItem(new SecurityRequirement().addList(BEARER_SCHEME));
     }
+
     private SecurityScheme createOAuthScheme() {
-        return new SecurityScheme().type(SecurityScheme.Type.OAUTH2).flows(createOAuthFlows());
+        return new SecurityScheme()
+                .type(SecurityScheme.Type.OAUTH2)
+                .flows(createOAuthFlows());
     }
+
     private OAuthFlows createOAuthFlows() {
         final var oauthFlow = new OAuthFlow()
                 .authorizationUrl(authURL + "/protocol/openid-connect" + "/auth")
@@ -44,6 +50,10 @@ public class SwaggerConfig {
         return new OAuthFlows().authorizationCode(oauthFlow);
     }
 
-
-
+    private SecurityScheme createBearerScheme() {
+        return new SecurityScheme()
+                .type(SecurityScheme.Type.HTTP)
+                .scheme("bearer")
+                .bearerFormat("JWT");
+    }
 }

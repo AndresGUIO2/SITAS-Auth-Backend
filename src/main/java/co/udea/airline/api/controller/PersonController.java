@@ -26,8 +26,8 @@ public class PersonController {
 
     @Operation(summary = "Register a person", description = "Register a person with mail and password as credentials.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Successful registration",
-                    content = @Content(schema = @Schema(implementation = Person.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Successful registration",
+                    content = @Content(schema = @Schema(implementation = String.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Invalid person data provided",
                     content = @Content),
             @ApiResponse(responseCode = "500", description = "Internal server error",
@@ -37,8 +37,8 @@ public class PersonController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody PersonRegistrationDTO registrationDto) {
         try {
             Person person = convertToEntity(registrationDto);
-            Person registeredPerson = authenticationService.registerPerson(person);
-            return ResponseEntity.ok(registeredPerson);
+            authenticationService.registerPerson(person);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Registration failed: " + e.getMessage());
         } catch (Exception e) {

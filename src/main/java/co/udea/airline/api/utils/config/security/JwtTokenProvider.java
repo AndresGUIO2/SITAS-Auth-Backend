@@ -1,10 +1,13 @@
 package co.udea.airline.api.utils.config.security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.Jwts;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
@@ -22,6 +25,12 @@ public class JwtTokenProvider {
      */
     @Value("${JWT_SECRET_KEY}")
     private String jwtSecret;
+
+    /**
+     * Emisor del token JWT.
+     */
+    @Value("${JWT_ISSUER}")
+    private String jwtIssuer;
 
     /**
      * Duración de validez de los tokens JWT en milisegundos.
@@ -47,10 +56,42 @@ public class JwtTokenProvider {
 
         // Genera el token JWT con la información proporcionada
         return Jwts.builder()
-                .claim("sub", authentication.getName())
-                .issuedAt(now)
-                .expiration(expiryDate)
-                .signWith(key)
+                .setSubject(authentication.getName())
+                .setIssuer(jwtIssuer)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(key, SignatureAlgorithm.HS256) // Especifica el algoritmo aquí
                 .compact();
+    }
+
+    /**
+     * Valida el token JWT y extrae los claims.
+     *
+     * @param token El token JWT a validar.
+     * @return Los claims extraídos del token JWT.
+     */
+    public Claims validateToken(String token) {
+        try {
+            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+            return Jwts.parser()
+                    .setSigningKey(key)
+                    .requireIssuer(jwtIssuer)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new RuntimeException("JWT token is invalid or expired");
+        }
+    }
+
+    /**
+     * Extrae el correo electrónico del token JWT.
+     *
+     * @param token El token JWT del cual extraer el correo electrónico.
+     * @return El correo electrónico extraído del token JWT.
+     */
+    public String getMailFromToken(String token) {
+        Claims claims = validateToken(token);
+        return claims.getSubject();
     }
 }
