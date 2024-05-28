@@ -1,5 +1,6 @@
 package co.udea.airline.api.utils.config;
 
+import co.udea.airline.api.utils.config.security.filters.RateLimitingFilter;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -18,6 +20,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.beans.factory.annotation.Value;
 import co.udea.airline.api.services.auth.CustomOAuth2UserService;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.header.writers.XXssProtectionHeaderWriter;
 
 import javax.crypto.SecretKey;
@@ -36,10 +39,12 @@ import org.springframework.web.filter.CorsFilter;
 public class WebSecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final RateLimitingFilter rateLimitingFilter;
 
     @Autowired
-    public WebSecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
+    public WebSecurityConfig(CustomOAuth2UserService customOAuth2UserService, RateLimitingFilter rateLimitingFilter) {
         this.customOAuth2UserService = customOAuth2UserService;
+        this.rateLimitingFilter = rateLimitingFilter;
     }
 
     @Bean
@@ -78,7 +83,8 @@ public class WebSecurityConfig {
                                 "frame-ancestors 'self';img-src 'self' data:;object-src 'none';" +
                                 "script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';" +
                                 "upgrade-insecure-requests"))
-                );
+                )
+                .addFilterBefore(rateLimitingFilter, UsernamePasswordAuthenticationFilter.class); // Agrega el filtro aquí
 
         return http.build();
     }
