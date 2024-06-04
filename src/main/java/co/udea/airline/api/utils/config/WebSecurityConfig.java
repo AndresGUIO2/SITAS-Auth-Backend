@@ -63,6 +63,8 @@ public class WebSecurityConfig {
             "/api/public/**", "/api/public/authenticate", "/public/api/auth/**", "/actuator/*", "/swagger-ui/**", "/api-docs/**"
     };
 
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
