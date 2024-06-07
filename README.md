@@ -24,9 +24,14 @@ Para ejecutar la aplicación Authorization Authentication, sigue estos pasos:
 La aplicación proporciona los siguientes endpoints para interactuar con la API:
 
 - **Registro de Usuarios 📝**: POST `/public/api/auth/register` - Permite registrar un nuevo usuario en el sistema.
+- **Login de Usuarios 🔑**: POST `/public/api/auth/login` - Permite el logeo de un usuario en el sistema.
+- **Validación de Tokens 🛡️**: GET `/api/user/me` - Permite validar el token de autenticación y obtener información del usuario autenticado.
 
 ## Requisitos del Sistema 📋
 - Java JDK 11 o superior ☕.
 - Apache Maven 📦.
 - IDE compatible con Spring Boot (por ejemplo, IntelliJ IDEA, Eclipse) 🖥️.
 - Conexión a Internet para descargar dependencias 🌐.
+
+## Despliegue y Documentación 📖
+La aplicación ya está desplegada y se pueden probar o consultar la API y el Swagger en el siguiente enlace: [Swagger UI](https://codefact.udea.edu.co/modulo-01/swagger-ui/index.html#/)
